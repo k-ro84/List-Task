@@ -8,8 +8,6 @@ import {Task} from '../Task'
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-
-
 tasks: Task[]=[];
 
   constructor(
@@ -18,9 +16,33 @@ tasks: Task[]=[];
 
   ngOnInit(): void {
     //like promise
-  this.taskService.getTasks().subscribe(tasks=>[
+  this.taskService.getTasks().subscribe(tasks=>(
     this.tasks=tasks
-  ]);
+  ));
   }
+
+  deleteTask(task:Task){
+   
+    this.taskService
+    .deleteTask(task)
+    .subscribe(
+      () =>
+      (this.tasks=this.tasks.filter( (t) =>{ 
+        
+        return t.id !==task.id}) ) 
+     )
+  }
+
+   toggleReminder(task:Task){
+    task.reminder = !task.reminder
+    //console.log(task)de esta manera muestra todo el task que se esta editando //
+    //console.log(task.reminder)aca solo muestra solo el valor f o t//
+   this.taskService.updateTaskReminder(task).subscribe();
+  }
+
+addTask(task:Task){
+ this.taskService.addTask(task).subscribe((task)=>[
+  this.tasks.push(task)])
+}
 
 }

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UiService } from 'src/app/service/ui.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { faBedPulse } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-header',
@@ -8,12 +13,27 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 title:string ='Task List' ;
-  constructor() { }
+showAddTask: boolean = true ;
+subscription? : Subscription; 
+
+
+  constructor(
+    private uiService:UiService,
+    private router:Router
+  ) { 
+    this.subscription = this.uiService.onToggle().subscribe(value=>this.showAddTask = value)
+   }
 
   ngOnInit(): void {
   }
 
   toggleAddTask(){
-   console.log("toggleAddTask!") ;
+   this.uiService.toggleAddTask();
   }
+
+  hasRoute(route:string){
+    return this.router.url === route
+  }
+
+
 }
