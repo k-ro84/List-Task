@@ -10,7 +10,8 @@
     padding: 0;
 }
 body{
-    font-family: sans-serif;    
+    font-family: sans-serif; 
+  background-color: rgb(16, 153, 110);
 }
 
 .container{
@@ -21,6 +22,7 @@ body{
     border: 1px solid steelblue;
     padding: 30px;
     border-radius: 5px;
+    background-color: cornflowerblue;
 }
 
 .btn {
@@ -76,4 +78,11 @@ body{
 .form-control-check input {
     flex: 2;
     height: 20px;
+}
+
+.hora{
+    text-align: right;
+    font-family:monospace;
+    font-style:italic;
+    color:rgb(11, 49, 49);
 }
